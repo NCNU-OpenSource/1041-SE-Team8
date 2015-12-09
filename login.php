@@ -1,7 +1,7 @@
 <html>
 <head>
 <link href="css/bootstrap.css" rel="stylesheet" media="screen">
-<link href="css/style.css" rel="stylesheet" media="screen">
+
 <?PHP
 session_start();
 $host = 'localhost';

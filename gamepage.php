@@ -3,6 +3,7 @@ require 'config.php';
 ?>
 <html>
 <head>
+<script src="js/jquery.js" type="text/javascript"></script>
 <?PHP
 $id=$_SESSION['id'];
 $sql="select * from user where id=$id ;";
@@ -62,13 +63,13 @@ while($row = mysqli_fetch_array($result)){      //<--升級功能
 	background-color:#97F615;
 	
 }
-#m-left-right{
+#mleftright{
 	width:15%;
 	height:100%;
 	background-color:#17F995;
 	float:left;
 }
-#m-middle{
+#mmiddle{
 	width:70%;
 	height:100%;
 	background-color:#97F911;
@@ -82,51 +83,105 @@ while($row = mysqli_fetch_array($result)){      //<--升級功能
 
 	
 }
+#mmmiddle{
+	width:70%;
+	height:70%;
+	background-color:#9123A1;
+	position:relative;
+	margin:0 auto;
+}
 
 </style>
+
+<script  type="text/javascript">
+//function 名稱不能取close
+function loadmsg(postID) {
+	DIV='maindiv';
+$.ajax({
+		url: 'ingredient.php',
+		dataType: 'html',
+		type: 'POST',
+		data: { id: postID},
+		error: function(xhr) {
+			$('#'+DIV).html(xhr);
+			},
+		success: function(response) {
+			$('#'+DIV).html(response); //set the html content of the object msg
+			}
+	});
+}
+function loadfood(){
+	document.getElementById('mmmiddle').style.display='';
+	DIV='div000';
+$.ajax({
+	url: 'clickstat.php',
+	datatype:'html',
+	type:'POST',
+	error:function(xhr){
+		$('#'+DIV).html(xhr);
+	},
+	success: function(response) {
+		$('#'+DIV).html(response); 
+	}
+	});
+}
+function closestat(obj,a){
+	document.getElementById(a).style.display = "none";
+}
+
+</script>
 </head>
 <body>
 <div id="container">
 	<div id="top">
-	<div id="account">
+		<div id="account">
 		角色資訊
 		<?php
-		echo "<table border='3'><tr><td>名稱</td>";
-		$result = mysqli_query($conn,$sql) or die('MySQL query error');
-		while($row=mysqli_fetch_array($result)){
-			echo "<td>".$row['playername']."</td></tr>";
-			echo "<tr><td>等級</td><td>".$row['level']."</td></tr>";
-			echo "<tr><td>經驗值</td><td>".$row['exp']."</td></tr>";
-		}
-		echo "</table>";
-		?>
-	</div>
-	<div id="buttonone">
-		<button>廚房</button>
-	</div>
-	<div id="buttontwo">
-		<button>商店</button>
-	</div>
+			echo "<table border='3'><tr><td>名稱</td>";
+			$result = mysqli_query($conn,$sql) or die('MySQL query error');
+			while($row=mysqli_fetch_array($result)){
+				echo "<td>".$row['playername']."</td></tr>";
+				echo "<tr><td>等級</td><td>".$row['level']."</td></tr>";
+				echo "<tr><td>經驗值</td><td>".$row['exp']."</td></tr>";
+			}
+			echo "</table>";
+			?>
+		</div>
+		<div id="buttonone">
+				<button>廚房</button>
+			</div>
+			<div id="buttontwo">
+				<button>商店</button>
+		</div>
 	</div>
 	
 	
 	<div id="middle">
-		<div id="m-left-right">
+		<div id="mleftright">
 			<button>前一個烤箱</button>
 		</div>
-	    <div id="m-middle">
+
+	    <div id="mmiddle">
 			<button>烤箱1</button>
 			<button>烤箱2</button>
+			<div id="mmmiddle" style="display:none">
+		<input type="button" onclick="closestat(this,'mmmiddle')" value="X">
+				<div id="div000" style="display:"></div>
+				<div id="maindiv" ></div>
+			</div>
+					
 		</div>
-		<div id="m-left-right">
+		<div id="mleftright">
 			<button>下一個烤箱</button>
 		</div>
 	</div>
-	
-	
+
 	<div id="bottom">
+
+		<input type="button" value="開始烤麵包囉" onclick="loadfood()" >
+
+
 	
-		<button>制作麵包囉</button><a href="ingredient.php?id=1">蘋果派</a> <a href="ingredient.php?id=2">布丁</a>
 	</div>
 	
 </div>

@@ -1,9 +1,7 @@
 <?PHP
-
+require 'config.php';
 $user=$_SESSION['id'];
-$id=$_POST['id'];
+$fid=$_POST['id'];
 $count=$_POST['count'];
-echo "U".$user;
-echo "I".$id;
-echo "c".$count;
+
 ?>

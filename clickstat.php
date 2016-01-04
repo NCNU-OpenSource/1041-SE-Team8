@@ -7,5 +7,4 @@
 			  // **onclick='loadmsg('1')'  不能跑，要改成onclick=\"loadmsg('1')\" 才能跑
 
 	}
-
 ?>

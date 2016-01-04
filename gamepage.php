@@ -3,24 +3,35 @@ require 'config.php';
 ?>
 <html>
 <head>
-<script src="js/jquery.js" type="text/javascript"></script>
-<?PHP
-$id=$_SESSION['id'];
-$sql="select * from user where id=$id ;";
-$result = mysqli_query($conn,$sql) or die('MySQL query error');
+<script src="js/jquery.js" type="text/javascript">
 
-while($row = mysqli_fetch_array($result)){      //<--升級功能
+</script>
+
+<?PHP
+
+//把玩家資料用SESSION 記起來，升級功能
+$sql = "SELECT * FROM user WHERE id='".$_SESSION['id']."'";
+$result = mysqli_query($conn,$sql);
+	while($row=mysqli_fetch_array($result)) {
+	$_SESSION['id'] = $row['id'];
+	$_SESSION['money']=$row['money'];
+	$_SESSION['playername'] = $row['playername'];
+	$_SESSION['exp']=$row['exp'];
+	$_SESSION['foodpackage']=$row['foodpackage'];
+	$_SESSION['oven']=$row['oven'];
 	if($row['exp']>=$row['level']*10)
 	{
-		$id=$_SESSION['id'];
 		$level=$row['level']+1;
-		$sql2="update user set level='$level', exp='0' where id='$id';";
+		$sql2="update user set level='$level', exp='0' where id='".$_SESSION['id']."';";
 		mysqli_query($conn,$sql2) or die("MySQL query error"); ;
-		
-		
+
 	}
+	$_SESSION['level']=$row['level'];
 	
+
 }
+
+
 ?>
 <style type="text/css">
 #container{
@@ -90,13 +101,22 @@ while($row = mysqli_fetch_array($result)){      //<--升級功能
 	position:relative;
 	margin:0 auto;
 }
-
+#middlediv,#mmmiddle{
+	position:absolute;
+	border:10px solid;
+	border-radius:20px;
+	bottom:15%;
+	left:20%;
+	width:60%;
+	height:60%;
+	background-color:#6123f1;
+}
 </style>
 
 <script  type="text/javascript">
 //function 名稱不能取close
 function loadmsg(postID) {
-	DIV='maindiv';
+	DIV='div002';
 $.ajax({
 		url: 'ingredient.php',
 		dataType: 'html',
@@ -111,7 +131,8 @@ $.ajax({
 	});
 }
 function loadfood(){
-	document.getElementById('mmmiddle').style.display='';
+	$('#mmmiddle').show();
+	$('#middlediv').hide();
 	DIV='div000';
 $.ajax({
 	url: 'clickstat.php',
@@ -128,30 +149,43 @@ $.ajax({
 function closestat(obj,a){
 	document.getElementById(a).style.display = "none";
 }
-
+function shop(){
+	$('#middlediv').show();
+		$('#mmmiddle').hide();
+	$('#div001').load('shop.php');
+	
+	
+}
+function kitchen(){
+	$('#middlediv').show()  ;
+	$('#mmmiddle').hide();
+	$('#div001').load('kitchen.php');
+	
+	
+}
 </script>
 </head>
-<body>
+<body >
 <div id="container">
 	<div id="top">
 		<div id="account">
-		角色資訊
+		
 		<?php
 			echo "<table border='3'><tr><td>名稱</td>";
 			$result = mysqli_query($conn,$sql) or die('MySQL query error');
 			while($row=mysqli_fetch_array($result)){
 				echo "<td>".$row['playername']."</td></tr>";
-				echo "<tr><td>等級</td><td>".$row['level']."</td></tr>";
-				echo "<tr><td>經驗值</td><td>".$row['exp']."</td></tr>";
+				echo "<tr><td>等級</td><td>".$row['level']."</td><td>金錢</td><td>".$row['money']."</td><td>烤爐數</td><td>".$row['oven']."</td></tr>";
+				echo "<tr><td>經驗值</td><td>".$row['exp']."</td><td>材料包</td><td>".$row['foodpackage']."</td></tr>";
 			}
 			echo "</table>";
 			?>
 		</div>
 		<div id="buttonone">
-				<button>廚房</button>
+				<button onclick="kitchen()">廚房</button>
 			</div>
 			<div id="buttontwo">
-				<button>商店</button>
+				<button onclick="shop()">商店</button>
 		</div>
 	</div>
 	
@@ -165,9 +199,9 @@ function closestat(obj,a){
 			<button>烤箱1</button>
 			<button>烤箱2</button>
 			<div id="mmmiddle" style="display:none">
-		<input type="button" onclick="closestat(this,'mmmiddle')" value="X">
-				<div id="div000" style="display:"></div>
-				<div id="maindiv" ></div>
+		<input type="button" onclick="closestat(this,'mmmiddle')" value="X"style="position:relative; left:95%">
+					<div id="div000" style="display:"></div>
+				<div id="div002" ></div>
 			</div>
 					
 		</div>
@@ -179,11 +213,12 @@ function closestat(obj,a){
 	<div id="bottom">
 
 		<input type="button" value="開始烤麵包囉" onclick="loadfood()" >
-
-
-	
 	</div>
-	
+	<div id="middlediv" style="display:none" >
+	<input type="button"  onclick="closestat(this,'middlediv')" value="X"style="position:relative; left:95%">
+	<div id="div000" style="display:"></div>
+	<div id="div001" style="margin:0 auto;"></div>
+	</div>
 </div>
 </body>
 </html>

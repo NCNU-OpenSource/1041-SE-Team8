@@ -1,7 +1,51 @@
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
 <!--<link href="css/bootstrap.css" rel="stylesheet" media="screen">
 <link href="css/style.css" rel="stylesheet" media="screen">-->
+<script>
+function check() {
+        text1 = document.getElementById("pwd");
+        text2 = document.getElementById("compwd");
+		
+		if (text1.value == null) {
+			document.getElementById("msg1").innerText = "";
+        }
+		else if (text1.value != text2.value) {
+            document.getElementById("msg1").innerText = "密碼不一致";
+        }
+		else{
+			document.getElementById("msg1").innerText = "";
+		}
+}
+
+</script>
+<style>
+
+#a{
+	position:relative;
+	float:left;
+	margin :5%;
+	top:55%;
+	left:10%;
+	padding:10px;
+	background-color:#17F995;
+	border: 2px solid;
+    border-radius: 25px;
+}
+#b{
+	position:relative;
+	left:45%;
+	top: 15%;
+	width:20%;
+	height:18%;
+	float:left;
+	background-color:#17F995;
+	padding:100px 4px 100px 10px;
+	border: 2px solid;
+    border-radius: 25px;
+}
+</style>
 <?PHP
 session_start();
 $host = 'localhost';
@@ -32,21 +76,32 @@ else
 				else
 				{
 					$_SESSION['id'] = $row['id'];
-					$_SESSION['playername'] = $row['playername'];
 					header("Location:gamepage.php");
 					exit(0);
 				}
 			} 
 		}
-111
+
 ?>
 </head>
 <body>
-<div class="wrapper"><div class="container">
+<div id="a">
+<h1>登入</h1>
 <form class="form" method="post" action="login.php">
 帳號: &nbsp &nbsp &nbsp <input type="text" name="id" ><br />
-密碼 : &nbsp &nbsp<input type="password" name="pwd"><br />
-<input type="submit" class="btn btn-warning">
-</div></div>
+密碼 : &nbsp &nbsp <input type="password" name="pwd"><br />
+<input type="submit" class="btn btn-warning" value="登入">
+</form>
+</div>
+<div id="b">
+<h1>註冊帳號</h1>
+<form class="form" method="post" action="register.php">
+帳號: &nbsp&nbsp&nbsp &nbsp &nbsp&nbsp <input type="text" name="rid" ></span><br />
+密碼 : &nbsp &nbsp&nbsp &nbsp&nbsp <input type="password" id="pwd" name="rpwd" ></span><br />
+確認密碼 : <input type="password" id="compwd"  name="rcpwd" onchange="check()"><span id="msg1"></span><br />
+匿稱 :   &nbsp&nbsp&nbsp&nbsp&nbsp &nbsp <input type="text" id="name" name="rname"><span id="msg4"></span><br />
+<input type="submit" value="註冊">
+</form>
+</div>
 </body>
 </html>

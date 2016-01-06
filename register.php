@@ -8,18 +8,10 @@ $cpwd=mysqli_real_escape_string($conn,$_POST['rcpwd']);
 $name=mysqli_real_escape_string($conn,$_POST['rname']);
 
 if($accountid==null||$pwd==null||$name==null){
-	?><script>
-		window.setTimeout(function() {window.location = 'login.php';}, 3000);
-	</script>
-<?PHP
-echo "輸入錯誤，3秒後返回首頁";
+echo "<script>alert('輸入錯誤');location.href = 'login.php';</script>";
 }
 else if ($pwd != $cpwd){
-	?><script>
-		window.setTimeout(function() {window.location = 'login.php';}, 3000);
-	</script>
-<?PHP
-echo "輸入錯誤，3秒後返回首頁";
+echo "<script>alert('輸入錯誤');location.href = 'login.php';</script>";
 }
 	
 else{
@@ -31,15 +23,10 @@ else{
 	while($row=mysqli_fetch_array($result)){
 		$id=$row['id'];
 	}
-	$sql="insert into oven (uid) value('$id');";
+	$sql="insert into oven (uid,uoven) value('$id','1');";
 	mysqli_query($conn,$sql) or die("MySQL insert message error");
-	$sql="insert into oven (uid) value('$id');";
+	$sql="insert into oven (uid,uoven) value('$id','2');";
 	mysqli_query($conn,$sql) or die("MySQL insert message error");
-	?><script>
-		window.setTimeout(function() {window.location = 'login.php';}, 3000);
-	</script>
-<?PHP
-echo "註冊成功，3秒後返回首頁";
+	echo "<script>alert('註冊成功');location.href = 'login.php';</script>";
 }
-
-?>
+	?>

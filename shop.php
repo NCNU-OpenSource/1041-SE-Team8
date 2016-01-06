@@ -1,9 +1,9 @@
 <html>
-<head>
+<head >
 <script>
 </script>
 </head>
-<body>
+<body >
 <?PHP
 require 'config.php';
 $sql="select *from shop ";
@@ -71,10 +71,10 @@ echo "</select>";?>
 </td><td colspan="2"height="15%"><input type="submit" value="購買" id="submit"><input type="text"name="id" value="<?php echo $_SESSION['id'];?>"hidden ></td></tr>
 </table>
 </form>
-<FORM action="addoven.php" method="POST">
+<FORM action="addoven.php" method="POST" >
 <table style="width:60%;height:45%; margin:0 auto; text-align: center;" border="2" >
 <tr><td  height="100%"width="50%"  >烤爐$:<?PHP echo $_SESSION['ovenprice'];?></td>
-<td colspan="2" rowspan="2" height="15%" ><input type="submit"  id="oven"></td></tr>
+<td colspan="2" rowspan="2" height="15%" ><input type="submit"  id="oven" value="" disabled="disabled" ></td></tr>
 </table>
 </FORM>
 

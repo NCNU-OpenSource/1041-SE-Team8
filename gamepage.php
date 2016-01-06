@@ -3,6 +3,7 @@ require 'config.php';
 ?>
 <html>
 <head>
+
 <script src="js/jquery.js" type="text/javascript">
 
 </script>
@@ -30,7 +31,16 @@ $result = mysqli_query($conn,$sql);
 	
 
 }
-
+$sql = "SELECT * FROM oven WHERE uid='".$_SESSION['id']."'";
+$result=mysqli_query($conn,$sql);
+while($rb=mysqli_fetch_array($result)){
+	if($rb['ovenid']==1){
+	$_SESSION['ovenid']=$rb['ovenid'];
+	$_SESSION['starttime']=$rb['starttime'];
+	$_SESSION['finishtime']=$rb['finishtime'];
+	$_SESSION['fname']=$rb['fname'];
+	}
+}
 
 ?>
 <style type="text/css">
@@ -85,8 +95,11 @@ $result = mysqli_query($conn,$sql);
 	height:100%;
 	background-color:#97F911;
 	float:left;
-	
+	overflow-y:hidden;
+	overflow-x:auto;
+	white-space:nowrap;
 }
+
 #bottom{
 	width:100%;
 	height:10%;
@@ -114,6 +127,9 @@ $result = mysqli_query($conn,$sql);
 </style>
 
 <script  type="text/javascript">
+function recheck(){
+　setTimeout('ShowTime()',10000);
+}
 //function 名稱不能取close
 function loadmsg(postID) {
 	DIV='div002';
@@ -126,12 +142,14 @@ $.ajax({
 			$('#'+DIV).html(xhr);
 			},
 		success: function(response) {
-			$('#'+DIV).html(response); //set the html content of the object msg
+			$('#'+DIV).html(response);
 			}
 	});
 }
 function loadfood(){
-	$('#mmmiddle').show();
+	//$('#mmmiddle').show();
+	$("#mmmiddle").fadeIn("slow");
+	$("#div000").fadeIn("slow");
 	$('#middlediv').hide();
 	DIV='div000';
 $.ajax({
@@ -147,10 +165,12 @@ $.ajax({
 	});
 }
 function closestat(obj,a){
-	document.getElementById(a).style.display = "none";
-}
+	//document.getElementById(a).style.display = "none";
+	 $("#"+a).fadeOut("slow");
+	}
 function shop(){
-	$('#middlediv').show();
+	//$('#middlediv').show();
+	$("#middlediv").fadeIn("slow");
 		$('#mmmiddle').hide();
 	$('#div001').load('shop.php');
 	
@@ -163,15 +183,32 @@ function kitchen(){
 	
 	
 }
+function showoven(){
+	DIV='mmiddle';
+$.ajax({
+	url: 'showoven.php',
+	datatype:'html',
+	datatype:'html',
+	type:'POST',
+	error:function(xhr){
+		$('#'+DIV).html(xhr);
+	},
+	success: function(response) {
+		$('#'+DIV).html(response); 
+	}
+	});
+}
 </script>
+
 </head>
-<body >
+<body onload="">
 <div id="container">
 	<div id="top">
 		<div id="account">
 		
 		<?php
 			echo "<table border='3'><tr><td>名稱</td>";
+			$sql = "SELECT * FROM user WHERE id='".$_SESSION['id']."'";
 			$result = mysqli_query($conn,$sql) or die('MySQL query error');
 			while($row=mysqli_fetch_array($result)){
 				echo "<td>".$row['playername']."</td></tr>";
@@ -191,23 +228,23 @@ function kitchen(){
 	
 	
 	<div id="middle">
+
 		<div id="mleftright">
 			<button>前一個烤箱</button>
+			<div ><span id="time"> </span></div>
 		</div>
 
 	    <div id="mmiddle">
-			<button>烤箱1</button>
-			<button>烤箱2</button>
-			<div id="mmmiddle" style="display:none">
-		<input type="button" onclick="closestat(this,'mmmiddle')" value="X"style="position:relative; left:95%">
-					<div id="div000" style="display:"></div>
-				<div id="div002" ></div>
-			</div>
-					
+			<script>showoven();</script>
 		</div>
 		<div id="mleftright">
 			<button>下一個烤箱</button>
 		</div>
+				<div id="mmmiddle" style="display:none">
+				<input type="button" onclick="closestat(this,'mmmiddle')" value="X"style="position:relative; left:95%">
+				<div id="div000" style="display:"></div>
+				<div id="div002" ></div>
+			</div>
 	</div>
 
 	<div id="bottom">
@@ -219,6 +256,7 @@ function kitchen(){
 	<div id="div000" style="display:"></div>
 	<div id="div001" style="margin:0 auto;"></div>
 	</div>
+	
 </div>
 </body>
 </html>

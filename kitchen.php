@@ -7,12 +7,12 @@
 
 require 'config.php';
 $id =$_SESSION['id'];
-$sql="select *from kitchen where user_id=$id;";//<----取得玩家背包物品
+/*$sql="select *from kitchen where user_id=$id;";//<----取得玩家背包物品
 $result=mysqli_query($conn,$sql);
 $food_money[]=0;
 $count=0;
 while ($rs=mysqli_fetch_array($result)) {
-	$sql_food="select *from food ;";//<----取得食物資訊
+	$sql_food="select * from food ;";//<----取得食物資訊
 	$result_food=mysqli_query($conn,$sql_food);
 	while ($rs_food=mysqli_fetch_array($result_food)){
 		//比對food和kitchen的名稱後儲存單價
@@ -20,7 +20,15 @@ while ($rs=mysqli_fetch_array($result)) {
 			$food_money[$count]=$rs_food['money'] ;
 		}
 	}
+	$food_money[$count]=$count;
 	$count++;
+}*/
+$count=0;
+$sql="select *from food,kitchen where user_id=$id and food.fname=kitchen.food_id";
+$result=mysqli_query($conn,$sql);
+while($row=mysqli_fetch_array($result)){
+	$food_money[$count]=$row['money'] ;
+		$count++;
 }
 ?>
 
@@ -28,7 +36,7 @@ while ($rs=mysqli_fetch_array($result)) {
 <script>
 function check(){
 	var item=document.getElementById("count").value;
-	var money=item*<?PHP $food_money["0"]?>;
+	var money=item*<?PHP echo $food_money["0"]?>;
 	alert("金額為 " +money);
 	document.getElementById("money").value=money;
 }
@@ -43,6 +51,7 @@ function check(){
 	<td>販賣</td>
 	<td>單價</td>
 	<td>總價</td>
+	<td><?PHPecho $food_money[0];?></td>	
 </tr>
 <tr>
     <?php
@@ -59,8 +68,9 @@ function check(){
 		for($i=0;$i<=20;$i++){
 			echo "<option value=".$i.">".$i."</option>";
 		}
-		echo "<input type='submit' value='結帳' id='submit' onclick='check();'>";
 		echo "</select>";
+		echo "<input type='button' value='結帳' id='submit' onclick='check();'>";
+
 		echo "</td>";
 		echo "<td>",$food_money[$count_t],"</td>";
 		echo "<td>" , "<input type='text' id='money' name='id' >" ,"</td>";

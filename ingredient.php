@@ -7,19 +7,25 @@ $result= mysqli_query($conn,$sql);
 $text="";
 while($row=mysqli_fetch_array($result)){
 	$id=$row['id'];
-	$text=$row['foodpackage'];
+	$funit=$row['foodpackage'];
+	$ftime=$row['time'];
+	$fname=$row['fname'];
 }
-echo "需要的材料包".$text."個<br/>";
 echo "<form action='stated.php' method='POST' >";
 echo "<input type='text'  name='id' value='".$id."' hidden/>";
-echo "數量<select class='count' name='count' id='count' onchange='checkfood()'>";
+echo "<input type='text'  name='ftime' value='".$ftime."' hidden/>";
+echo "<input type='text'  name='fname' value='".$fname."' hidden/>";
+echo "<input type='text'  name='funit' value='".$funit."' hidden/>";
+echo "數量<select class='count' name='count' id='count' onchange='checkfood()' >";
+
 for($i=0;$i<=20;$i++){
 	echo "<option value=".$i.">".$i."</option>";
 	
 }
 echo "</select>";
+echo " * ".$funit." 個材料包";
 echo "<br/>";
-echo "<input type='submit' id='submit' value='開始烤囉'/>";
+echo "<input type='submit' id='submit' value='開始烤囉' disabled/>";
 echo "</form>";
 
 ?>
@@ -27,8 +33,10 @@ echo "</form>";
 
 function checkfood(){
 	var foodpackage = <?PHP echo $_SESSION['foodpackage'];?>;
+	var foodunit=<?PHP echo $funit;?>;
 	var count=document.getElementById("count").value;
-	if(foodpackage<count){
+	var sum=count *foodunit;
+	if(foodpackage<sum){
 		document.getElementById("submit").disabled=true;
 		document.getElementById("submit").value="材枓包不足夠";
 		

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主機: 127.0.0.1
--- 產生時間： 2016-01-04 13:55:05
+-- 產生時間： 2016-01-06 05:30:07
 -- 伺服器版本: 5.6.26
 -- PHP 版本： 5.6.12
 
@@ -30,21 +30,45 @@ CREATE TABLE IF NOT EXISTS `food` (
   `id` int(20) NOT NULL,
   `fname` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `foodpackage` int(10) DEFAULT '0',
-  `time` int(10) NOT NULL
+  `time` int(10) NOT NULL,
+  `money` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- 資料表的匯出資料 `food`
 --
 
-INSERT INTO `food` (`id`, `fname`, `foodpackage`, `time`) VALUES
-(1, '白麵包', 5, 30),
-(2, '黑麵包', 16, 40),
-(3, '黃麵包', 7, 50),
-(4, '黑麵包', 23, 60),
-(5, '橙麵包', 8, 70),
-(6, '青麵包', 16, 80),
-(7, '紅麵包', 25, 90);
+INSERT INTO `food` (`id`, `fname`, `foodpackage`, `time`, `money`) VALUES
+(1, '白麵包', 5, 30, 100),
+(2, '黑麵包', 16, 40, 220),
+(3, '黃麵包', 7, 50, 30),
+(4, '灰麵包', 23, 60, 40),
+(5, '橙麵包', 8, 70, 50),
+(6, '青麵包', 16, 80, 60),
+(7, '紅麵包', 25, 90, 70);
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `kitchen`
+--
+
+CREATE TABLE IF NOT EXISTS `kitchen` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `food_id` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `amount` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- 資料表的匯出資料 `kitchen`
+--
+
+INSERT INTO `kitchen` (`id`, `user_id`, `food_id`, `amount`) VALUES
+(1, 1, '白麵包', 10),
+(2, 1, '黑麵包', 5),
+(3, 2, '黃麵包', 10),
+(4, 1, '紅麵包', 1);
 
 -- --------------------------------------------------------
 
@@ -129,16 +153,17 @@ CREATE TABLE IF NOT EXISTS `user` (
   `exp` int(11) NOT NULL DEFAULT '0',
   `foodpackage` int(10) NOT NULL DEFAULT '0',
   `money` int(11) DEFAULT '0',
-  `oven` int(11) DEFAULT '2'
+  `oven` int(11) DEFAULT '2',
+  `bag_id` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- 資料表的匯出資料 `user`
 --
 
-INSERT INTO `user` (`id`, `account`, `password`, `playername`, `level`, `exp`, `foodpackage`, `money`, `oven`) VALUES
-(1, 'hi', '123', 'hiiii', 14, 0, 5, 7300, 4),
-(8, '123', '123', '123', 14, 0, 5, 8000, 4);
+INSERT INTO `user` (`id`, `account`, `password`, `playername`, `level`, `exp`, `foodpackage`, `money`, `oven`, `bag_id`) VALUES
+(1, 'hi', '123', 'hiiii', 14, 0, 23, 1000, 4, 1),
+(8, '123', '123', '123', 14, 0, 5, 8000, 4, 8);
 
 --
 -- 已匯出資料表的索引
@@ -148,6 +173,12 @@ INSERT INTO `user` (`id`, `account`, `password`, `playername`, `level`, `exp`, `
 -- 資料表索引 `food`
 --
 ALTER TABLE `food`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- 資料表索引 `kitchen`
+--
+ALTER TABLE `kitchen`
   ADD PRIMARY KEY (`id`);
 
 --

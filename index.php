@@ -87,7 +87,7 @@ else
 <body>
 <div id="a">
 <h1>登入</h1>
-<form class="form" method="post" action="login.php">
+<form class="form" method="post" action="index.php">
 帳號: &nbsp &nbsp &nbsp <input type="text" name="id" ><br />
 密碼 : &nbsp &nbsp <input type="password" name="pwd"><br />
 <input type="submit" class="btn btn-warning" value="登入">

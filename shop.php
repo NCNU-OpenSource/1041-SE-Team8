@@ -38,7 +38,7 @@ function checkmoney(){
 	
 	
 }
-$(document).mousemove(function (){
+function open(){
 	var level=<?PHP echo $_SESSION['level'];?>;
 	var money=<?PHP echo $_SESSION['money'];?>;
 	var oven=<?PHP echo $_SESSION['oven'];?>;
@@ -56,10 +56,11 @@ $(document).mousemove(function (){
 		document.getElementById("oven").value="不能擴充";
 	}
 
-});
+}
 
 </script>
 <FORM action="shopsend.php" method="POST">
+<script>open();</script>
 <table style="width:60%;height:45%; margin:0 auto; text-align: center;" border="2" >
 <tr><td  width="50%" height="100%" id="test">材料包$:<?PHP echo $_SESSION['foodprice'];?></td>
 <td height="15%"><?PHP

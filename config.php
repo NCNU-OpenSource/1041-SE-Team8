@@ -8,9 +8,9 @@ $conn = mysqli_connect($host, $user, $pass,$db) or die('Error with MySQL connect
 mysqli_query($conn,"SET NAMES utf8"); 
 
 if(!isset($_SESSION["id"]))
-	header("Location:login.php");
+	header("Location:index.php");
 if($_SESSION["id"]=="")
-	header("Location:login.php");
+	header("Location:index.php");
 
 
 ?>

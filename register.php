@@ -8,10 +8,10 @@ $cpwd=mysqli_real_escape_string($conn,$_POST['rcpwd']);
 $name=mysqli_real_escape_string($conn,$_POST['rname']);
 
 if($accountid==null||$pwd==null||$name==null){
-echo "<script>alert('輸入錯誤');location.href = 'login.php';</script>";
+echo "<script>alert('輸入錯誤');location.href = 'index.php';</script>";
 }
 else if ($pwd != $cpwd){
-echo "<script>alert('輸入錯誤');location.href = 'login.php';</script>";
+echo "<script>alert('輸入錯誤');location.href = 'index.php';</script>";
 }
 	
 else{
@@ -27,6 +27,6 @@ else{
 	mysqli_query($conn,$sql) or die("MySQL insert message error");
 	$sql="insert into oven (uid,uoven) value('$id','2');";
 	mysqli_query($conn,$sql) or die("MySQL insert message error");
-	echo "<script>alert('註冊成功');location.href = 'login.php';</script>";
+	echo "<script>alert('註冊成功');location.href = 'index.php';</script>";
 }
 	?>

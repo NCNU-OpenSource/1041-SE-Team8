@@ -17,14 +17,14 @@ var b=1;
 	}
 }
 function gostart(id,a){
-	
+
 	if(a<0){
 		document.getElementById(id.id).value= "完成囉" ;
 	}
 	else{
 	document.getElementById(id.id).value= a ;
-	a=a-60;
-	setTimeout('gostart(' + id.id + ',' + a + ');',1000);
+	a=a-10;
+	setTimeout('gostart(' + id.id + ',' + a + ');',100);
 	}
 	
 }
@@ -34,7 +34,20 @@ function clickfunction(ovenid,uoven){
 		document.getElementById(uoven.id).disabled=true;
 	}
 	else if(v=="完成囉"){
-		location.href="abc.php";
+		$("#div010").fadeIn("slow");
+		DIV="div011";
+		$.ajax({
+		url: 'ovendone.php',
+		datatype:'html',
+		type:'POST',
+		data: { ovenid: ovenid},
+		error:function(xhr){
+			$('#'+DIV).html(xhr);
+		},
+		success: function(response) {
+			$('#'+DIV).html(response); 
+		}
+		});
 	}
 	else{
 		//$('#div000').show();
@@ -72,7 +85,7 @@ while($row=mysqli_fetch_array($result)){
 	$a= date("H:i:s",time())."...";
 	$b=date("H:i:s",strtotime($row['finishtime']));*/
 	//當前時間(時:分:秒)
-	$a=date("H:i:s",time());
+	$a=date("h:i:s",time());
 	//完成時間(時:分:秒)
 	$b=$row['finishtime'];
 	
@@ -92,7 +105,7 @@ while($row=mysqli_fetch_array($result)){
 
 ?>
 
-<div id="div010" style="width:250px;height:150px;background-color:red;position:absolute;top:30%;left:80%;display:none;" >
+<div id="div010" style="width:250px;height:150px;background-color:red;position:absolute;top:35%;left:40%;display:none;" >
 <input type="button"  onclick="closestat(this,'div010')" value="X"style="position:relative; top:40%;left:90%;" >
 <div id="div011">
 </div>

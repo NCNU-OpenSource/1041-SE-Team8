@@ -47,6 +47,8 @@ while($rb=mysqli_fetch_array($result)){
 <style type="text/css">
 #container{
 	margin:20px auto;
+	background-image: url("icon/kitchen_background.jpg");
+	background-size:cover;
 }
 #top{
 	width:100%;
@@ -57,7 +59,6 @@ while($rb=mysqli_fetch_array($result)){
 	width:70%;
 	height:100%;
 	float:left;
-	background-color:#82FF82;
 	margin:0 auto;
 	
 }
@@ -77,19 +78,16 @@ while($rb=mysqli_fetch_array($result)){
 #middle{
 	width:100%;
 	height:70%;
-	//background-color:#97F615;
 	
 }
 #mleftright{
 	width:15%;
 	height:100%;
-	background-color:#17F995;
 	float:left;
 }
 #mmiddle{
 	width:70%;
 	height:100%;
-	//background-color:#97F911;
 	float:left;
 	overflow-y:hidden;
 	overflow-x:auto;
@@ -99,13 +97,13 @@ while($rb=mysqli_fetch_array($result)){
 #bottom{
 	width:100%;
 	height:10%;
-	background-color:#97F6A1;
 
 	
 }
 #mmmiddle{
-		background-image: url("icon/background1.jpg");
+	background-image: url("icon/background1.jpg");
 }
+
 #middlediv,#mmmiddle{
 	position:absolute;
 	border:10px solid;
@@ -114,7 +112,7 @@ while($rb=mysqli_fetch_array($result)){
 	left:20%;
 	width:60%;
 	height:60%;
-	background-color:#6123f1;
+	background-image: url("icon/background1.jpg");
 }
 #div000{
 	position:relative;
@@ -137,7 +135,6 @@ while($rb=mysqli_fetch_array($result)){
 	left:5%;
 	border-style:solid;
 	border-radius:20px;
-	background-color:#e68900;
 	
 }
 
@@ -197,7 +194,6 @@ function kitchen(){
 	$('#middlediv').show()  ;
 	$('#mmmiddle').hide();
 	$('#div001').load('kitchen.php');
-	
 	
 }
 function showoven(){

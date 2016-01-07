@@ -256,6 +256,11 @@ $.ajax({
 			onclick="window.open('https://twitter.com/');return false;">
 			<img src="icon/twitter.png" style="height:10%">
 			</a>
+			</br>
+			<a href="javascript:void(0);" 
+			onclick="window.open('https://github.com/');return false;">
+			<img src="icon/github.png" style="height:10%">
+			</a>
 			<div ><span id="time"> </span></div>
 		</div>
 

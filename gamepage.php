@@ -3,11 +3,11 @@ require 'config.php';
 ?>
 <html>
 <head>
-
+<link rel="stylesheet"  href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="javascript" href="jquery-1.11.3.min.js">
 <script src="js/jquery.js" type="text/javascript">
 
 </script>
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
 <?PHP
 
@@ -47,12 +47,10 @@ while($rb=mysqli_fetch_array($result)){
 <style type="text/css">
 #container{
 	margin:20px auto;
-	
 }
 #top{
 	width:100%;
 	height:15%;
-	background-color:#845682;
 	margin:0 auto;
 }
 #account{
@@ -67,7 +65,6 @@ while($rb=mysqli_fetch_array($result)){
 	width:15%;
 	height:100%;
 	float:left;
-	background-color:#22FF82;
 	margin:0 auto;
 	
 }
@@ -75,14 +72,12 @@ while($rb=mysqli_fetch_array($result)){
 	width:15%;
 	height:100%;
 	float:left;
-	background-color:#22FF25;
 	margin:0 auto;
-	
 }
 #middle{
 	width:100%;
 	height:70%;
-	background-color:#97F615;
+	//background-color:#97F615;
 	
 }
 #mleftright{
@@ -94,7 +89,7 @@ while($rb=mysqli_fetch_array($result)){
 #mmiddle{
 	width:70%;
 	height:100%;
-	background-color:#97F911;
+	//background-color:#97F911;
 	float:left;
 	overflow-y:hidden;
 	overflow-x:auto;
@@ -109,11 +104,7 @@ while($rb=mysqli_fetch_array($result)){
 	
 }
 #mmmiddle{
-	width:70%;
-	height:70%;
-	background-color:#9123A1;
-	position:relative;
-	margin:0 auto;
+		background-image: url("icon/background1.jpg");
 }
 #middlediv,#mmmiddle{
 	position:absolute;
@@ -125,6 +116,31 @@ while($rb=mysqli_fetch_array($result)){
 	height:60%;
 	background-color:#6123f1;
 }
+#div000{
+	position:relative;
+	left:5%;
+	width:85%;
+	float:left;
+	overflow-y:hidden;
+	overflow-x:auto;
+	white-space:nowrap;
+}
+#div002{
+	position:absolute;
+	width:90%;
+	height:60%;
+	border-top:5px; 
+	border-left:10%; 
+	border-right:15px; 
+	border-bottom:15px; 
+	top:30%;
+	left:5%;
+	border-style:solid;
+	border-radius:20px;
+	background-color:#e68900;
+	
+}
+
 </style>
 
 <script  type="text/javascript">
@@ -208,7 +224,7 @@ $.ajax({
 		<div id="account">
 		
 		<?php
-			echo "<table border='1'  class='table-condensed'><tr><td>名稱</td>";
+			echo "<table border='3'><tr><td>名稱</td>";
 			$sql = "SELECT * FROM user WHERE id='".$_SESSION['id']."'";
 			$result = mysqli_query($conn,$sql) or die('MySQL query error');
 			while($row=mysqli_fetch_array($result)){
@@ -219,11 +235,11 @@ $.ajax({
 			echo "</table>";
 			?>
 		</div>
-		<div id="buttonone" >
-				<button onclick="kitchen()" class="btn btn-primary">廚房</button>
+		<div id="buttonone">
+				<img src="icon/bag_1.png" onclick="kitchen()" style="height:100%">
 			</div>
-			<div id="buttontwo" >
-				<button onclick="shop()" class="btn btn-primary">商店</button>
+			<div id="buttontwo">
+				<img src="icon/shop_1.png" onclick="shop()" style="height:100%">
 		</div>
 	</div>
 	
@@ -242,7 +258,7 @@ $.ajax({
 			<button>下一個烤箱</button>
 		</div>
 				<div id="mmmiddle" style="display:none">
-				<input type="button" class="btn btn-danger" onclick="closestat(this,'mmmiddle')" value="X"style="position:relative; left:95%">
+				<input type="button" onclick="closestat(this,'mmmiddle')" value="X" class="btn btn-danger" style="position:relative; left:10%;">
 				<div id="div000" style="display:"></div>
 				<div id="div002" ></div>
 			</div>
@@ -250,10 +266,10 @@ $.ajax({
 
 	<div id="bottom">
 
-		<input type="button" class="btn btn-primary" value="開始烤麵包囉" onclick="loadfood()" >
+		<input type="button" value="開始烤麵包囉" onclick="loadfood()" >
 	</div>
 	<div id="middlediv" style="display:none" >
-	<input type="button" class="btn btn-danger" onclick="closestat(this,'middlediv')" value="X"style="position:relative; left:95%">
+	<input type="button"  onclick="closestat(this,'middlediv')" value="X"style="position:relative; left:95%">
 	<div id="div000" style="display:"></div>
 	<div id="div001" style="margin:0 auto;"></div>
 	</div>

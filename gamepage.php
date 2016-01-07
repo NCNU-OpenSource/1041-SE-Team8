@@ -6,7 +6,7 @@ require 'config.php';
 <link rel="stylesheet"  href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <link rel="javascript" href="jquery-1.11.3.min.js">
 <script src="js/jquery.js" type="text/javascript">
-
+var fbhtml_url=window.location.toString();
 </script>
 
 <?PHP
@@ -241,9 +241,21 @@ $.ajax({
 	
 	
 	<div id="middle">
-
 		<div id="mleftright">
-			<button>前一個烤箱</button>
+			<a href="javascript:void(0);" 
+			onclick="window.open('http://www.facebook.com');return false;">
+			<img src="icon/Facebook.png" style="height:10%">
+			</a>
+			</br>
+			<a href="javascript:void(0);" 
+			onclick="window.open('https://www.instagram.com/');return false;">
+			<img src="icon/ig.png" style="height:10%">
+			</a>
+			</br>
+			<a href="javascript:void(0);" 
+			onclick="window.open('https://twitter.com/');return false;">
+			<img src="icon/twitter.png" style="height:10%">
+			</a>
 			<div ><span id="time"> </span></div>
 		</div>
 

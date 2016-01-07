@@ -236,17 +236,10 @@ $.ajax({
 			?>
 		</div>
 		<div id="buttonone">
-<<<<<<< HEAD
 				<img src="icon/bag_1.png" onclick="kitchen()" style="height:100%">
 			</div>
 			<div id="buttontwo">
 				<img src="icon/shop_1.png" onclick="shop()" style="height:100%">
-=======
-				<img src="bag_1.png" onclick="kitchen()" style="height:100%">
-			</div>
-			<div id="buttontwo">
-				<img src="shop_1.png" onclick="shop()" style="height:100%">
->>>>>>> origin/master
 		</div>
 	</div>
 	
@@ -265,11 +258,7 @@ $.ajax({
 			<button>下一個烤箱</button>
 		</div>
 				<div id="mmmiddle" style="display:none">
-<<<<<<< HEAD
 				<input type="button" onclick="closestat(this,'mmmiddle')" value="X" class="btn btn-danger" style="position:relative; left:10%;">
-=======
-				<input type="button" onclick="closestat(this,'mmmiddle')" value="X"style="position:relative; left:95%">
->>>>>>> origin/master
 				<div id="div000" style="display:"></div>
 				<div id="div002" ></div>
 			</div>

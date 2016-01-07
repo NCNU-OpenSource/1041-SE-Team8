@@ -2,6 +2,10 @@
 <?PHP
 
 require 'config.php';
+if($_POST['count']==0){
+	echo "<script>alert('你要買0個幹嘛?');location.href = 'gamepage.php';</script>";
+}
+else{
 $id=$_POST['id'];
 $count=$_POST['count'];
 $money=$_SESSION['money'];
@@ -22,7 +26,7 @@ mysqli_query($conn,$sql);
 
 //購買成功訊息
 echo "<script>alert('購買成功');location.href = 'gamepage.php';</script>";
-
+}
 ?>
 
 

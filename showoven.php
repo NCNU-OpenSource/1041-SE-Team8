@@ -23,8 +23,8 @@ function gostart(id,a){
 	}
 	else{
 	document.getElementById(id.id).value= a ;
-	a=a-10;
-	setTimeout('gostart(' + id.id + ',' + a + ');',100);
+	a=a-1;
+	setTimeout('gostart(' + id.id + ',' + a + ');',1000);
 	}
 	
 }

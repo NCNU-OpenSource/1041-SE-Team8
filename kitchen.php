@@ -1,5 +1,25 @@
 <html>
 <head>
+<style>
+#tablecss{
+
+}
+</style>
+<script>
+function saleclick(num){
+	document.getElementById("sb"+num).hidden=false;
+	document.getElementById("ss"+num).hidden=false;
+	
+}
+
+</script>
+<style>
+kitchentable td{
+	border-bottom:1px solid black;
+	border-left:0px;
+	border-right:0px;
+}
+</style>
 </head>
 <body>
 
@@ -43,36 +63,37 @@ while($row=mysqli_fetch_array($result)){
 </script>
 
 <!--列出背包東西-->
-
-<table style="width:95%;height:30%; margin:0 auto; text-align: center;" border="2">
-<tr>
-    <td>麵包總類 </td>
-	 <td>擁有數量</td>
+<div id="tablecss">
+<table style="width:95%;margin:0 auto; text-align: center;" CLASS="table"  id="kitchentable"border="5">
+<tr class='success'>
+    <td>麵包名稱 </td>
 	 <td>單價 </td>
 	 <td>販賣</td>
 
 </tr>
 
     <?php
-	$num=1;
+	$num=0;
 	$sql="select *from food,kitchen where user_id=$id and food.fname=kitchen.food_id and amount<>'0'";//<----取得玩家背包物品
 	$result=mysqli_query($conn,$sql);
 	while ($rs=mysqli_fetch_array($result)) {
 		
-		echo "<tr>";
-		echo "<td>".$rs['food_id']."</td>";
-		echo "<td> ".$rs['amount']."</td>";
-		echo "<td> ".$rs['money']."</td>";
-		echo "<td><form action='kitchensend.php' method='POST'>數量";
+		
+		echo "<tr class='danger'>";
+		echo "<td><img src='icon/bread/bread$num.png'><span class='label label-success label-as-badge'style=' border-radius: 1em;'>".$rs['amount']."</span></td>";
+		echo "<td> <span class='label label-pill label-warning'>$</span>".$rs['money']."</td>";
+		echo "<td><form action='kitchensend.php' method='POST'>";
 		echo "<input type='text' name='uid' value='".$_SESSION['id']."'hidden>";
 		echo "<input type='text' name='foodid' value='".$rs['food_id']."'hidden>";
 		echo "<input type='text' name='money' value='".$rs['money']."'hidden>";
-		echo "<select class='count' name='count' >";
+		echo "<h2><a class='label label-pill label-danger' id='sale' onclick='saleclick($num)'>SALE</a></h2>";
+		echo "<select class='count' name='count' id='ss$num' hidden>";
 		for($i=$rs['amount'];$i>=0;$i--){
 			echo "<option value=".$i.">".$i."</option>";
 		}
-		echo "</select>";
-		echo "<input type='submit' value='結帳' >";
+		echo "</select><br/>";
+		
+		echo "<input type='submit' value='賣出' id='sb$num' hidden>";
 		echo "</form></td>";
 		
 		echo "</tr>";
@@ -81,8 +102,7 @@ while($row=mysqli_fetch_array($result)){
 	}
 	?>
 
-<!--</form>-->
 </table>
-
+</div>
 </body>
 </html>

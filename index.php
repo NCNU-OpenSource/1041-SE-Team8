@@ -21,15 +21,18 @@ function check() {
 
 </script>
 <style>
-
+body{
+	background-size:cover;
+	background-repeat:no-repeat;
+}
 #a{
 	position:relative;
 	float:left;
 	margin :5%;
-	top:55%;
+	top:37%;
 	left:10%;
 	padding:10px;
-	background-color:#17F995;
+	background-color: #b300b1;
 	border: 2px solid;
     border-radius: 25px;
 }
@@ -40,10 +43,17 @@ function check() {
 	width:20%;
 	height:18%;
 	float:left;
-	background-color:#17F995;
+	background-color:#33ccff;
 	padding:100px 4px 100px 10px;
 	border: 2px solid;
     border-radius: 25px;
+}
+#text{
+	position:relative;
+	top:30%;
+	left:10%;
+	font-size:70px;
+	color:white;
 }
 </style>
 <?PHP
@@ -81,27 +91,33 @@ else
 				}
 			} 
 		}
+		
 
 ?>
 </head>
-<body>
+<body  background="icon/body1.jpg">
+<div  id="text">
+<span>HAPPY</span>
+<span>KITCHEN</span>
+</div>
 <div id="a">
 <h1>登入</h1>
 <form class="form" method="post" action="index.php">
-帳號: &nbsp &nbsp &nbsp <input type="text" name="id" ><br />
-密碼 : &nbsp &nbsp <input type="password" name="pwd"><br />
+帳號:<input type="text" name="id" ><br />
+密碼:<input type="password" name="pwd"><br />
 <input type="submit" class="btn btn-warning" value="登入">
 </form>
 </div>
 <div id="b">
 <h1>註冊帳號</h1>
 <form class="form" method="post" action="register.php">
-帳號: &nbsp&nbsp&nbsp &nbsp &nbsp&nbsp <input type="text" name="rid" ></span><br />
-密碼 : &nbsp &nbsp&nbsp &nbsp&nbsp <input type="password" id="pwd" name="rpwd" ></span><br />
+帳號:<input type="text" name="rid" ></span><br />
+密碼 :<input type="password" id="pwd" name="rpwd" ></span><br />
 確認密碼 : <input type="password" id="compwd"  name="rcpwd" onchange="check()"><span id="msg1"></span><br />
-匿稱 :   &nbsp&nbsp&nbsp&nbsp&nbsp &nbsp <input type="text" id="name" name="rname"><span id="msg4"></span><br />
+匿稱 :<input type="text" id="name" name="rname"><span id="msg4"></span><br />
 <input type="submit" value="註冊">
 </form>
 </div>
+
 </body>
 </html>

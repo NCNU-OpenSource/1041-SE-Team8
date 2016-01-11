@@ -1,3 +1,4 @@
+
 <?php
 require 'config.php';
 ?>
@@ -6,7 +7,7 @@ require 'config.php';
 <link rel="stylesheet"  href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <link rel="javascript" href="jquery-1.11.3.min.js">
 <script src="js/jquery.js" type="text/javascript">
-var fbhtml_url=window.location.toString();
+//var fbhtml_url=window.location.toString();
 </script>
 
 <?PHP
@@ -21,7 +22,7 @@ $result = mysqli_query($conn,$sql);
 	$_SESSION['exp']=$row['exp'];
 	$_SESSION['foodpackage']=$row['foodpackage'];
 	$_SESSION['oven']=$row['oven'];
-	if($row['exp']>=$row['level']*10)
+	if($row['exp']>=$row['level']*$row['level']*10)
 	{
 		$level=$row['level']+1;
 		$sql2="update user set level='$level', exp='0' where id='".$_SESSION['id']."';";
@@ -45,9 +46,17 @@ while($rb=mysqli_fetch_array($result)){
 
 ?>
 <style type="text/css">
+body{
+	background-size:cover;
+	background-repeat:no-repeat;
+}
 #container{
 	margin:20px auto;
-	background-image: url("icon/kitchen_background.jpg");
+	padding: 6px;
+	width:90%;
+	height:85%;
+	border-radius:40px;
+	background-image: url("icon/kitchen_background11.jpg");
 	background-size:cover;
 }
 #top{
@@ -59,7 +68,14 @@ while($rb=mysqli_fetch_array($result)){
 	width:70%;
 	height:100%;
 	float:left;
+	position:relative;
+	top:20%;
+	left:3%;
 	margin:0 auto;
+/*	transform: rotate(1deg); 
+	transform: skewZ(20deg);
+*/
+
 	
 }
 #buttonone{
@@ -84,14 +100,25 @@ while($rb=mysqli_fetch_array($result)){
 	width:15%;
 	height:100%;
 	float:left;
+	position:relative;
+	top:5%;
 }
 #mmiddle{
 	width:70%;
-	height:100%;
+	height:90%;
+	position:relative;
+	top:10%;
 	float:left;
 	overflow-y:hidden;
 	overflow-x:auto;
 	white-space:nowrap;
+	border-bottom:5px;
+	border-top:0px;
+	border-style:solid;
+	background-color:#f2f2f2;
+	opacity:0.95;
+	padding:0px;
+
 }
 
 #bottom{
@@ -123,6 +150,17 @@ while($rb=mysqli_fetch_array($result)){
 	overflow-x:auto;
 	white-space:nowrap;
 }
+#div001{
+	position:relative;
+	top:10%;
+	left:5%;
+	width:85%;
+	float:left;
+	height:85%;
+	overflow-x:hidden;
+	overflow-y:auto;
+	white-space:nowrap;
+}
 #div002{
 	position:absolute;
 	width:90%;
@@ -135,9 +173,21 @@ while($rb=mysqli_fetch_array($result)){
 	left:5%;
 	border-style:solid;
 	border-radius:20px;
+		background-color: #e6b900;
+}
+#actable td{
+	width:50px;
+	
 	
 }
-
+#actable{
+	background-color:white;
+	padding:0;
+	background-image: url("icon/background1.jpg");
+	border-radius:30px;
+	color:white;
+	
+}
 </style>
 
 <script  type="text/javascript">
@@ -191,7 +241,7 @@ function shop(){
 	
 }
 function kitchen(){
-	$('#middlediv').show()  ;
+	$("#middlediv").fadeIn("slow");
 	$('#mmmiddle').hide();
 	$('#div001').load('kitchen.php');
 	
@@ -214,20 +264,32 @@ $.ajax({
 </script>
 
 </head>
-<body onload="">
+<body  background="icon/body1.jpg" >
 <div id="container">
 	<div id="top">
 		<div id="account">
 		
 		<?php
-			echo "<table border='3'><tr><td>名稱</td>";
-			$sql = "SELECT * FROM user WHERE id='".$_SESSION['id']."'";
-			$result = mysqli_query($conn,$sql) or die('MySQL query error');
-			while($row=mysqli_fetch_array($result)){
-				echo "<td>".$row['playername']."</td></tr>";
-				echo "<tr><td>等級</td><td>".$row['level']."</td><td>金錢</td><td>".$row['money']."</td><td>烤爐數</td><td>".$row['oven']."</td></tr>";
-				echo "<tr><td>經驗值</td><td>".$row['exp']."</td><td>材料包</td><td>".$row['foodpackage']."</td></tr>";
-			}
+		$up=$_SESSION['exp'];
+		$down=$_SESSION['level']*$_SESSION['level']*10;
+		
+		$tdvalue= number_format(($up/$down),4)*100;
+			echo "<table  height='90%' id='actable'>";
+			echo "<tr>";
+			echo "<td rowspan='3' style='text-align:center;'><strong>".$_SESSION['level']."</strong><br/><span class='btn btn-warning btn-md' style=' border-radius: 3em;'>Level</span></td>";
+			echo "<td rowspan='2' colspan='2' style='text-align:center'><strong>".$_SESSION['playername']."</strong></td><td></td><td></td><td></td><td></td></tr>";
+			echo "<tr>";
+			echo "<td><img src='icon/foodpackage.png' width='50%' height='10%'></td><td>".$_SESSION['foodpackage']."</td>";
+			echo "<td><img src='icon/oven.png' width='50%' height='1.5%'></td><td>".$_SESSION['oven']."</td>";
+			echo "</tr>";
+			echo "<tr >";
+			echo "<td ><span class='btn btn-info btn-xs' style='position:relative;left:7%'>Exp</span></td>";
+			//經驗橫TD  改width 值和後面值就可,只吃%值(10%)
+			echo "<td style='width:30%'><div class='progress'><div class='progress-bar progress-bar-striped active' role='progressbar'aria-valuenow='40' aria-valuemin='0' aria-valuemax='100' 
+			style='width:".$tdvalue."%'>".$tdvalue."%</div></div></td>";
+			echo "<td><img src='icon/money.png' width='50%' height='10%'></td><td>".$_SESSION['money']."</td>";
+			echo "<td></td><td></td>";
+			echo "</tr>";
 			echo "</table>";
 			?>
 		</div>
@@ -239,28 +301,11 @@ $.ajax({
 		</div>
 	</div>
 	
-	
+	<script>
+		var fbhtml_url=window.location.toString();
+	</script>
 	<div id="middle">
 		<div id="mleftright">
-			<a href="javascript:void(0);" 
-			onclick="window.open('http://www.facebook.com');return false;">
-			<img src="icon/Facebook.png" style="height:10%">
-			</a>
-			</br>
-			<a href="javascript:void(0);" 
-			onclick="window.open('https://www.instagram.com/');return false;">
-			<img src="icon/ig.png" style="height:10%">
-			</a>
-			</br>
-			<a href="javascript:void(0);" 
-			onclick="window.open('https://twitter.com/');return false;">
-			<img src="icon/twitter.png" style="height:10%">
-			</a>
-			</br>
-			<a href="javascript:void(0);" 
-			onclick="window.open('https://github.com/');return false;">
-			<img src="icon/github.png" style="height:10%">
-			</a>
 			<div ><span id="time"> </span></div>
 		</div>
 
@@ -268,7 +313,7 @@ $.ajax({
 			<script>showoven();</script>
 		</div>
 		<div id="mleftright">
-			<button>下一個烤箱</button>
+	<img src="icon/dog.jpg" width="70%" style="position:relative; top :50%;" >
 		</div>
 				<div id="mmmiddle" style="display:none">
 				<input type="button" onclick="closestat(this,'mmmiddle')" value="X" class="btn btn-danger" style="position:relative; left:10%;">
@@ -278,15 +323,36 @@ $.ajax({
 	</div>
 
 	<div id="bottom">
-
-		<input type="button" value="開始烤麵包囉" onclick="loadfood()" >
+		<input type="button" value="開始烤麵包" onclick="loadfood()" class="btn btn-large btn-block btn-danger" style="font-size:36px; border-radius:180px 180px 20px 20px;">
 	</div>
 	<div id="middlediv" style="display:none" >
-	<input type="button"  onclick="closestat(this,'middlediv')" value="X"style="position:relative; left:95%">
+	<input type="button"  onclick="closestat(this,'middlediv')" value="X" class="btn btn-danger" style="position:relative; left:7%">
 	<div id="div000" style="display:"></div>
 	<div id="div001" style="margin:0 auto;"></div>
 	</div>
-	
+
 </div>
+	<div id="logout" style="position:relative;left:60%;width:30%;">
+	<a href="javascript:void(0);" onclick="window.open('http://www.facebook.com/sharer/sharer.php?u=www.yahoo.com.tw');return false;">
+			<img src="icon/Facebook.png" style="height:6% ;">
+			</a>
+			<a href="javascript:void(0);" 
+			onclick="window.open('https://www.instagram.com/');return false;">
+			<img src="icon/ig.png" style="height:6%">
+			</a>
+			<a href="javascript:void(0);" 
+			onclick="window.open('https://twitter.com/home/?status=yahoo.com.tw');return false;">
+			<img src="icon/twitter.png" style="height:6%">
+			</a>
+			<a href="javascript:void(0);" 
+			onclick="window.open('https://github.com/');return false;">
+			<img src="icon/github.png" style="height:6%">
+			</a>
+			<a href="javascript:void(0);" 
+			onclick="window.open('https://plus.google.com/share?url=www.yahoo.com.tw');return false;">
+			<img src="icon/google.png" style="height:6%">
+			</a>
+			<a type="button" class="btn btn-danger" href="logout.php">登出</a>
+			</div>
 </body>
 </html>

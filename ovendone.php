@@ -6,7 +6,9 @@ $ovenid=$_POST['ovenid'];
 
 $sql="select *from oven where ovenid=$ovenid";
 $result=mysqli_query($conn,$sql);
-echo "<table align='center' border='2'>";
+echo "<div id='tablecss'>";
+echo "<table align='center' border='4' CLASS='table'>";
+
 while($row=mysqli_fetch_array($result)){
 	echo "<tr ><td colspan='2' align='center'>烤爐詳細資料</td></tr>";
 	echo "<tr><td>食物名稱</td><td>".$row['fname']."</td></tr>";
@@ -26,6 +28,6 @@ echo "</td></tr>";
 echo "</form>";
 
 echo "</table>";
-
+echo "</div>";
 
 ?>

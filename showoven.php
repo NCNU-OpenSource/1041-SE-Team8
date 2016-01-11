@@ -70,6 +70,20 @@ function clickfunction(ovenid,uoven){
 }
 
 </script>
+<style>
+#div010{
+	width:350px;
+	height:280px;
+	background-color: #ffd633;
+	position:absolute;
+	top:15%;left:35%;
+	display:none;
+	padding:5px;
+	border:5px solid;
+	
+}
+
+</style>
 </head>
 <body>
 
@@ -99,14 +113,15 @@ while($row=mysqli_fetch_array($result)){
 	$ovenid=$row['ovenid'];
 	$uoven=$row['uoven'];
 	$status=$row['status'];
-	echo "<input type='button' id='oven".$uoven."' onclick='clickfunction(".$ovenid.",oven".$row['uoven'].")'style='height:300px;width:300px;margin:8% 8%;font-size:40px'>";
+	echo "<input type='button' id='oven".$uoven."' onclick='clickfunction(".$ovenid.",oven".$row['uoven'].")'style='height:250px;width:325px;font-size:24px ;position:relative;bottom:10%;margin:8% 8%;background-image:url(icon/buttonoven.png);'>";
+
 	echo "<script>startset(oven".$row['uoven'].",".$time.",".$status.");</script>";
 	}
 
 ?>
 
-<div id="div010" style="width:250px;height:150px;background-color:red;position:absolute;top:35%;left:40%;display:none;" >
-<input type="button"  onclick="closestat(this,'div010')" value="X"style="position:relative; top:40%;left:90%;" >
+<div id="div010"  >
+<input type="button"  onclick="closestat(this,'div010')"  class="btn btn-danger" value="X"style="position:relative; top:40%;left:90%;" >
 <div id="div011">
 </div>
 </div>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主機: 127.0.0.1
--- 產生時間： 2016-01-08 12:54:57
+-- 產生時間： 2016-01-13 03:37:15
 -- 伺服器版本: 5.6.26
 -- PHP 版本： 5.6.12
 
@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `kitchen` (
 --
 
 INSERT INTO `kitchen` (`id`, `user_id`, `food_id`, `amount`) VALUES
-(1, 1, '白麵包', 0),
+(1, 1, '白麵包', 1),
 (2, 1, '黑麵包', 7),
 (3, 2, '黃麵包', 10),
 (4, 1, '紅麵包', 21),
@@ -101,15 +101,15 @@ CREATE TABLE IF NOT EXISTS `oven` (
   `starttime` time NOT NULL,
   `finishtime` time NOT NULL,
   `status` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=latin1;
 
 --
 -- 資料表的匯出資料 `oven`
 --
 
 INSERT INTO `oven` (`ovenid`, `uid`, `uoven`, `fname`, `fcount`, `starttime`, `finishtime`, `status`) VALUES
-(1, 1, 1, '', 0, '00:00:00', '00:00:00', 0),
-(2, 1, 2, '白麵包', 1, '07:57:44', '05:44:14', 1),
+(1, 1, 1, '黃麵包', 1, '00:00:00', '00:00:00', 0),
+(2, 1, 2, '', 0, '00:00:00', '00:00:00', 0),
 (11, 8, 1, '', 0, '00:00:00', '00:00:00', 0),
 (12, 8, 2, '', 0, '00:00:00', '00:00:00', 0),
 (13, 8, 3, '', 0, '00:00:00', '00:00:00', 0),
@@ -147,7 +147,8 @@ INSERT INTO `oven` (`ovenid`, `uid`, `uoven`, `fname`, `fcount`, `starttime`, `f
 (48, 21, 3, '', 0, '00:00:00', '00:00:00', 0),
 (49, 22, 1, '白麵包', 1, '07:41:40', '07:42:10', 1),
 (50, 22, 2, '黃麵包', 1, '07:51:28', '07:52:18', 1),
-(51, 22, 3, '', 0, '00:00:00', '00:00:00', 0);
+(51, 22, 3, '', 0, '00:00:00', '00:00:00', 0),
+(52, 1, 5, '橙麵包', 1, '09:59:46', '10:00:56', 1);
 
 -- --------------------------------------------------------
 
@@ -192,7 +193,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `account`, `password`, `playername`, `level`, `exp`, `foodpackage`, `money`, `oven`) VALUES
-(1, 'hi', '123', 'hiiii', 16, 150, 163, 690, 4),
+(1, 'hi', '123', 'hiiii', 28, 152, 155, 9000, 5),
 (8, '123', '123', '123', 14, 0, 5, 8000, 4),
 (9, '111', '111', '111', 14, 0, 5, 1000, 4),
 (10, '222', '222', '222', 1, 0, 5, 0, 2),
@@ -261,7 +262,7 @@ ALTER TABLE `kitchen`
 -- 使用資料表 AUTO_INCREMENT `oven`
 --
 ALTER TABLE `oven`
-  MODIFY `ovenid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=52;
+  MODIFY `ovenid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=53;
 --
 -- 使用資料表 AUTO_INCREMENT `shop`
 --

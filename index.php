@@ -21,10 +21,7 @@ function check() {
 
 </script>
 <style>
-body{
-	background-size:cover;
-	background-repeat:no-repeat;
-}
+
 #a{
 	position:relative;
 	float:left;

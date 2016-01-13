@@ -1,5 +1,6 @@
-﻿<?PHP
-require 'config.php';
+﻿
+<?PHP
+	require 'config.php';
 header('Content-type: text/html; charset=utf-8');
 $accountid=mysqli_real_escape_string($conn,$_POST['rid']);
 $pwd=mysqli_real_escape_string($conn,$_POST['rpwd']);
@@ -7,8 +8,7 @@ $cpwd=mysqli_real_escape_string($conn,$_POST['rcpwd']);
 $name=mysqli_real_escape_string($conn,$_POST['rname']);
 
 if($accountid==null||$pwd==null||$name==null){
-echo "<script>alert('輸入錯誤');</script>";
-echo "<script>location.href = 'index.php';</script>";
+echo "<script>alert('輸入錯誤');location.href = 'index.php';</script>";
 }
 else if ($pwd != $cpwd){
 echo "<script>alert('輸入錯誤');location.href = 'index.php';</script>";

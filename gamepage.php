@@ -46,10 +46,6 @@ while($rb=mysqli_fetch_array($result)){
 
 ?>
 <style type="text/css">
-body{
-	background-size:cover;
-	background-repeat:no-repeat;
-}
 #container{
 	margin:20px auto;
 	padding: 6px;
@@ -57,6 +53,7 @@ body{
 	height:85%;
 	border-radius:40px;
 	background-image: url("icon/kitchen_background11.jpg");
+	
 	background-size:cover;
 }
 #top{
@@ -264,7 +261,7 @@ $.ajax({
 </script>
 
 </head>
-<body  background="icon/body1.jpg" >
+<body  background="icon/body1.jpg">
 <div id="container">
 	<div id="top">
 		<div id="account">
@@ -306,6 +303,30 @@ $.ajax({
 	</script>
 	<div id="middle">
 		<div id="mleftright">
+			<!--<a href="javascript:void(0);" onclick="window.open('http://www.facebook.com/sharer/sharer.php?u=www.yahoo.com.tw');return false;">
+			<img src="icon/Facebook.png" style="height:10%">
+			</a>
+			</br>
+			<a href="javascript:void(0);" 
+			onclick="window.open('https://www.instagram.com/');return false;">
+			<img src="icon/ig.png" style="height:10%">
+			</a>
+			</br>
+			<a href="javascript:void(0);" 
+			onclick="window.open('https://twitter.com/home/?status=yahoo.com.tw');return false;">
+			<img src="icon/twitter.png" style="height:10%">
+			</a>
+			</br>
+			<a href="javascript:void(0);" 
+			onclick="window.open('https://github.com/');return false;">
+			<img src="icon/github.png" style="height:10%">
+			</a>
+			<br/>
+			<a href="javascript:void(0);" 
+			onclick="window.open('https://plus.google.com/share?url=www.yahoo.com.tw');return false;">
+			<img src="icon/google.png" style="height:10%">
+			</a>
+			</br>-->
 			<div ><span id="time"> </span></div>
 		</div>
 
@@ -323,7 +344,8 @@ $.ajax({
 	</div>
 
 	<div id="bottom">
-		<input type="button" value="開始烤麵包" onclick="loadfood()" class="btn btn-large btn-block btn-danger" style="font-size:36px; border-radius:180px 180px 20px 20px;">
+
+		<input type="button" value="-開始烤麵包-" onclick="loadfood()" class="btn btn-large btn-block btn-danger" style="font-size:36px; border-radius:180px 180px 20px 20px;">
 	</div>
 	<div id="middlediv" style="display:none" >
 	<input type="button"  onclick="closestat(this,'middlediv')" value="X" class="btn btn-danger" style="position:relative; left:7%">
